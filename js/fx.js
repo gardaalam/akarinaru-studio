@@ -21,6 +21,7 @@
     '<linearGradient id="gemR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC6DE"/><stop offset="1" stop-color="#2E2266"/></linearGradient>' +
     '<radialGradient id="halo"><stop offset="0" stop-color="#FFB8DA" stop-opacity=".55"/><stop offset="1" stop-color="#FFB8DA" stop-opacity="0"/></radialGradient>' +
     '<radialGradient id="moonG" cx=".4" cy=".35"><stop offset="0" stop-color="#FFFDF4"/><stop offset=".6" stop-color="#FFE7D6"/><stop offset="1" stop-color="#F6B9CF"/></radialGradient>' +
+    '<mask id="moonBite" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="900"><rect width="1440" height="900" fill="#fff"/><circle cx="1215" cy="170" r="84" fill="#000"/></mask>' +
     '<linearGradient id="rayG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>' +
     '<linearGradient id="pillarG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE3A3" stop-opacity="0"/><stop offset=".6" stop-color="#FFC6E6" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".8"/></linearGradient>' +
     '<linearGradient id="ribbonG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A3163A"/><stop offset=".5" stop-color="#FF4F6E"/><stop offset="1" stop-color="#C8283C"/></linearGradient>' +
@@ -104,8 +105,7 @@
       '<g fill="#FFE3A3">' + [[120,330],[190,290],[260,310],[330,250],[390,280],[760,110],[820,150],[900,130],[940,190],[1300,520],[1350,470],[1410,500]].map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.2"/>'; }).join('') + '</g>';
     // moon
     o += '<circle cx="1180" cy="190" r="190" fill="url(#halo)"/>' +
-      '<circle cx="1180" cy="190" r="92" fill="url(#moonG)"/>' +
-      '<circle cx="1215" cy="170" r="84" fill="#3A3592" opacity=".92"/>';
+      '<circle cx="1180" cy="190" r="92" fill="url(#moonG)" mask="url(#moonBite)"/>';
     // crystal cubes
     o += cube(140, 540, 26, .22) + cube(470, 160, 18, .18) + cube(690, 600, 22, .2) + cube(960, 470, 30, .26) + cube(1380, 640, 20, .16) + cube(1010, 250, 14, .2);
     // floating diamond cards

@@ -117,7 +117,7 @@
           '<div class="event"><div class="event__inner">' +
             '<div class="event__tag">NOW OPEN</div>' +
             '<div class="event__big">' + left + ' of ' + total + ' slots</div>' +
-            '<p class="event__txt">' + left + ' of ' + total + ' commission slots remain this month.</p>' +
+            '<p class="event__txt">Reserve yours before they\'re gone — new slots open every month.</p>' +
             '<div class="event__dots" aria-hidden="true">' + dots + '</div>' +
             '<a class="btn-cream" href="' + ETSY + '" target="_blank" rel="noopener">Reserve on Etsy</a>' +
           '</div></div>' +
@@ -386,6 +386,7 @@
   $('#startSub').innerHTML = fxTitle('Studio of Living Characters', 'amethyst', 'clamp(24px,3.6vw,48px)', 'span');
   var start = $('#start');
   $('#enterBtn').addEventListener('click', function () {
+    try { sessionStorage.setItem('ak-entered', '1'); } catch (e) {}
     AK.music.start(); syncSound();
     start.classList.add('out');
     setTimeout(function () { start.hidden = true; }, 900);
@@ -398,4 +399,14 @@
   $$('.screen').forEach(function (s) { s.hidden = true; });
   $('.slots b').textContent = AK.slots.left;
   $('.slots').lastChild.textContent = ' / ' + AK.slots.total;
+
+  /* Skip the intro for direct links (e.g. /#gallery) and for visitors who already
+     entered in this browser session. Music stays off until they press Sound
+     (browsers block audio before a click anyway). */
+  var deep = location.hash.slice(1), entered = false;
+  try { entered = sessionStorage.getItem('ak-entered') === '1'; } catch (e) {}
+  if (SCREENS.indexOf(deep) >= 0 || entered) {
+    start.hidden = true;
+    show(SCREENS.indexOf(deep) >= 0 ? deep : 'home');
+  }
 })();
